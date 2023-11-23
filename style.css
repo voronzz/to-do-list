@@ -1,20 +1,41 @@
 .list {
     padding-top: 10px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.list__note-title {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 .list__input {
     padding: 5px;
     text-align: center;
 }
-.list__news {
-    margin: 50px;
+.list__btn {
+    padding: 5px;
+    text-align: center;
+}
+.lists__note {
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
+    padding: 25px;
 }
-.ist__input-news {
-    padding: 5px;
+.list__page-note {
+    display: flex;
+    justify-content: space-between;
+    /*gap: 20px;*/
     width: 200px;
+    padding: 10px;
+    border: 1px solid;
+}
+.done {
+    background-color: green;
+}
+.closes {
+    background-color: red;
 }

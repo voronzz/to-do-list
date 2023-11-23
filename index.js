@@ -1,21 +1,46 @@
 const listItems = document.querySelector('.list__input');
-const listItemsNews = document.querySelector('.list__news');
-const buttonClick = document.querySelector('.click');
+const listItemsNews = document.querySelector('.list__note-pages');
+const buttonClick = document.querySelector('.list__btn');
 
 
 
 function handleClick() {
-    buttonClick.addEventListener('click', function () {
-        const listItemsTextInput = listItems.value;
 
-        const newListElement = document.createElement("input");
-        newListElement.classList.add('ist__input-news');
-        newListElement.value = listItemsTextInput;
 
-        listItems.value = '';
+    if(listItems.value.length === 0) {
+        return
+    }
 
-        listItemsNews.append(newListElement);
-    });
+    const listItemsTextInput = listItems.value;
+
+    listItemsNews.insertAdjacentHTML("beforebegin", `
+             <li class="list__page-note">
+             <span>${listItemsTextInput}</span>
+             <span>
+            <span class="material-symbols-outlined done">
+                    done
+            </span>
+            <span class="material-symbols-outlined closes">
+                close
+            </span>
+            </span>
+            </li>
+            `)
+
+    listItems.value = '';
+
+    const removeBtns = document.querySelectorAll('.closes');
+
+    removeBtns.forEach(button => {
+        button.addEventListener('click', function (eventTarget) {
+             const removeItemList = document.querySelector('.list__page-note');
+
+             removeItemList.remove(eventTarget.currentTarget);
+        })
+    })
 }
 
-handleClick();
+buttonClick.addEventListener('click', handleClick);
+
+//buttonClick.removeEventListener('click', handleClick);
+//handleClick();
