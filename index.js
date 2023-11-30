@@ -17,13 +17,13 @@ function handleClick() {
     listItemsNews.insertAdjacentHTML(
         "afterbegin",
         `<li class="list__page-note">
-                <span>${listTextInput}</span>
-<!--                <input type="text">-->
+                <span class="page-input">${listTextInput}</span>
+                <input type="text" class="text-field__input field-input" placeholder="Ввод">
               <span>
-                <span class="material-symbols-outlined done" data-typr="edit">
+                <span class="material-symbols-outlined change-btn" data-typr="edit">
                     done
                 </span>
-                <span class="material-symbols-outlined remove" data-type="remove">
+                <span class="material-symbols-outlined remove-btn" data-type="remove">
                 close
                 </span>
              </span>
@@ -35,29 +35,32 @@ function handleClick() {
     window.removeEventListener('click', handleClick);
 }
 
-    // const removeBtns = document.querySelectorAll('.remove');
-    //
-    // buttonClick.addEventListener('click', handleClick);
-    //
-    // removeBtns.forEach((button) => {
-    // button.addEventListener('click', removeButton);
-    // });
-    // function removeButton() {
-    //     const listItem = document.querySelector('.list__page-note');
-    //
-    //     listItem.remove();
-    // }
+listItems.oninput = function () {
+    this.value = this.value.substring(0, 20);
+}
 
 function removeButton(e) {
     const listItem = e.target.closest('.list__page-note');
     listItem.remove();
 }
-
+function changeButton(e) {
+    const filed = document.querySelector('.field-input');
+    const input = document.querySelector('.page-input');
+    filed.classList.add('active');
+    input.classList.add('no-active');
+    console.log('оно живое');
+}
 function addRemoveListeners() {
-    const removeBtns = document.querySelectorAll('.remove');
+    const removeBtns = document.querySelectorAll('.remove-btn');
+    const changeBtns = document.querySelectorAll('.change-btn');
+
     removeBtns.forEach((button) => {
         button.addEventListener('click', removeButton);
     });
+
+    changeBtns.forEach((button) => {
+        button.addEventListener('click',changeButton );
+    })
 }
 
 buttonClick.addEventListener('click', () => {
