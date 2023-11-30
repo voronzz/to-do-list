@@ -1,46 +1,69 @@
-const listItems = document.querySelector('.list__input');
-const listItemsNews = document.querySelector('.list__note-pages');
+// Получаем элементы списка
+const listItems = document.querySelector('.text-field__input');
+const listItemsNews = document.querySelector('.lists__note');
 const buttonClick = document.querySelector('.list__btn');
 
-
-
+// Функция для обработки клика на кнопке
 function handleClick() {
-
-
+    // Если значение input пустое, то ничего не делаем
     if(listItems.value.length === 0) {
         return
     }
 
-    const listItemsTextInput = listItems.value;
+    // Получаем значение из input
+    const listTextInput = listItems.value;
 
-    listItemsNews.insertAdjacentHTML("beforebegin", `
-             <li class="list__page-note">
-             <span>${listItemsTextInput}</span>
-             <span>
-            <span class="material-symbols-outlined done">
+    // Вставляем новый элемент списка
+    listItemsNews.insertAdjacentHTML(
+        "afterbegin",
+        `<li class="list__page-note">
+                <span>${listTextInput}</span>
+<!--                <input type="text">-->
+              <span>
+                <span class="material-symbols-outlined done" data-typr="edit">
                     done
-            </span>
-            <span class="material-symbols-outlined closes">
+                </span>
+                <span class="material-symbols-outlined remove" data-type="remove">
                 close
-            </span>
-            </span>
-            </li>
-            `)
+                </span>
+             </span>
+            </li>`
+    )
 
     listItems.value = '';
 
-    const removeBtns = document.querySelectorAll('.closes');
-
-    removeBtns.forEach(button => {
-        button.addEventListener('click', function (eventTarget) {
-             const removeItemList = document.querySelector('.list__page-note');
-
-             removeItemList.remove(eventTarget.currentTarget);
-        })
-    })
+    window.removeEventListener('click', handleClick);
 }
 
-buttonClick.addEventListener('click', handleClick);
+    // const removeBtns = document.querySelectorAll('.remove');
+    //
+    // buttonClick.addEventListener('click', handleClick);
+    //
+    // removeBtns.forEach((button) => {
+    // button.addEventListener('click', removeButton);
+    // });
+    // function removeButton() {
+    //     const listItem = document.querySelector('.list__page-note');
+    //
+    //     listItem.remove();
+    // }
 
-//buttonClick.removeEventListener('click', handleClick);
-//handleClick();
+function removeButton(e) {
+    const listItem = e.target.closest('.list__page-note');
+    listItem.remove();
+}
+
+function addRemoveListeners() {
+    const removeBtns = document.querySelectorAll('.remove');
+    removeBtns.forEach((button) => {
+        button.addEventListener('click', removeButton);
+    });
+}
+
+buttonClick.addEventListener('click', () => {
+    handleClick();
+    addRemoveListeners();
+});
+
+
+
