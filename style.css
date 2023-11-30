@@ -1,3 +1,7 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 .list {
     padding-top: 10px;
     display: flex;
@@ -5,19 +9,50 @@
     justify-content: flex-start;
     align-items: center;
 }
-.list__note-title {
+.text-field {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
-.list__input {
+.text-field__input {
     padding: 5px;
-    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #bdbdbd;
+    font-size: 15px;
+}
+.text-field__input:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #bdbdbd;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+}
+.list__input::placeholder {
+    color: #212529;
+    opacity: 0.4;
 }
 .list__btn {
     padding: 5px;
     text-align: center;
+    border: 0;
+    border-radius: 5px;
+    background-color: #4676D7;
+    appearance: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    min-width: 100px;
 }
+
+.list__btn:hover {
+    background: #1d49aa;
+}
+
+.list__btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #cbd6ee;
+}
+
 .lists__note {
     display: flex;
     flex-direction: column;
@@ -28,14 +63,23 @@
 .list__page-note {
     display: flex;
     justify-content: space-between;
-    /*gap: 20px;*/
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
     width: 200px;
     padding: 10px;
-    border: 1px solid;
 }
 .done {
     background-color: green;
 }
-.closes {
+.remove {
     background-color: red;
+    padding: 2px;
+    border-radius: 5px;
+    color: #fff;
 }
+.done {
+     background-color: green;
+     padding: 2px;
+     border-radius: 5px;
+     color: #fff;
+ }
