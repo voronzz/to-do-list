@@ -20,7 +20,7 @@
     border: 1px solid #bdbdbd;
     font-size: 15px;
 }
-.field-input {
+.list__note-container {
     display: none;
 }
 .active {
@@ -28,6 +28,9 @@
 }
 .no-active {
     display: none;
+}
+.verified {
+    color: #0064ffeb;
 }
 .text-field__input:focus {
     color: #212529;

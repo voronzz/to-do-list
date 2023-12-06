@@ -17,8 +17,11 @@ function handleClick() {
     listItemsNews.insertAdjacentHTML(
         "afterbegin",
         `<li class="list__page-note">
-                <span class="page-input">${listTextInput}</span>
-                <input type="text" class="text-field__input field-input" placeholder="Ввод">
+                <span class="list__note-value">${listTextInput}</span>
+                <div class="list__note-container">
+                    <input type="text" class="text-field__input list__note-text" placeholder="Ввод">
+                    <span class="material-symbols-outlined verified">verified</span>
+                </div>
               <span>
                 <span class="material-symbols-outlined change-btn" data-typr="edit">
                     done
@@ -34,7 +37,7 @@ function handleClick() {
 
     window.removeEventListener('click', handleClick);
 }
-
+//Ограничение на ввоод 20 символов в строке
 listItems.oninput = function () {
     this.value = this.value.substring(0, 20);
 }
@@ -44,15 +47,34 @@ function removeButton(e) {
     listItem.remove();
 }
 function changeButton(e) {
-    const filed = document.querySelector('.field-input');
-    const input = document.querySelector('.page-input');
-    filed.classList.add('active');
-    input.classList.add('no-active');
-    console.log('оно живое');
+    const changeField = document.querySelector('.list__note-container');
+    const input = document.querySelector('.list__note-value');
+
+        changeField.classList.add('active');
+        input.classList.add('no-active');
 }
+function fieldButton() {
+    const changeField = document.querySelector('.list__note-container');
+    const input = document.querySelector('.list__note-value');
+    const textFieldInput = document.querySelector('.list__note-text');
+
+    if(textFieldInput.value.length === 0) {
+        return
+    }
+
+    const textValueField = textFieldInput.value;
+
+    changeField.classList.remove('active');
+    input.classList.remove('no-active');
+
+
+    input.textContent = textValueField;
+}
+
 function addRemoveListeners() {
     const removeBtns = document.querySelectorAll('.remove-btn');
     const changeBtns = document.querySelectorAll('.change-btn');
+    const buttonVerified = document.querySelector('.verified');
 
     removeBtns.forEach((button) => {
         button.addEventListener('click', removeButton);
@@ -60,12 +82,16 @@ function addRemoveListeners() {
 
     changeBtns.forEach((button) => {
         button.addEventListener('click',changeButton );
-    })
+    });
+
+    buttonVerified.addEventListener('click', fieldButton);
 }
 
 buttonClick.addEventListener('click', () => {
     handleClick();
     addRemoveListeners();
+    // changeButton();
+    // fieldButton();
 });
 
 
